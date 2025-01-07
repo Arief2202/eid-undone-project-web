@@ -1,0 +1,112 @@
+.test {
+    background: #d0c0f0;
+}
+
+.table {
+    border: none;
+}
+
+.table-electrindo {
+    --bs-table-color: #fff;
+    --bs-table-bg: #38761d;
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: #a9d08e;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #38761d;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border: none;
+}
+
+.table-electrindo th:not(:last-child) {
+    border: none;
+    border-right: 1px solid #fafafa;
+    text-align: center;
+    font-size: 1.0vw;
+}
+
+.table-electrindo th:is(:last-child) {
+    border: none;
+    text-align: center;
+    font-size: 1.0vw;
+}
+
+.table-stripped-electrindo tbody .level3{
+    --bs-table-color: #000;
+    --bs-table-bg: rgb(255, 100, 100);
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: rgb(255, 100, 100);
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #a9d08e;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+    border-bottom: 2px solid #000;
+}
+.table-stripped-electrindo tbody .level2{
+    --bs-table-color: #000;
+    --bs-table-bg: yellow;
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: yellow;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #a9d08e;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+    border-bottom: 2px solid #000;
+}
+.table-stripped-electrindo tbody .level1,
+.table-stripped-electrindo tbody tr {
+    --bs-table-color: #000;
+    --bs-table-bg: #a9d08e;
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: #a9d08e;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #a9d08e;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+    border-bottom: 2px solid #000;
+}
+.table-stripped-electrindo tbody .history{
+    --bs-table-color: #000;
+    --bs-table-bg: #fff;
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: #a9d08e;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #a9d08e;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+    border-bottom: 2px solid #000;
+}
+
+.table tbody tr td {
+    border: none;
+    font-size: 1.0vw;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.button-bottom {
+    background: rgb(0, 107, 95);
+    background: linear-gradient(144deg, rgba(0, 107, 95, 1) 0%, rgb(99, 124, 0) 100%);
+    border: none;
+    font-size: 1.2vw;
+    font-weight: 600;
+    margin-inline-end: 20px;
+}

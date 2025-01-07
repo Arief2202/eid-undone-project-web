@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Seven Segment';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Seven Segment'), url('/css/Seven Segment.woff') format('woff');
+}
+
+
