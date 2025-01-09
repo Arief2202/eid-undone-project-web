@@ -21,7 +21,7 @@
                 <a href="/"><img src="/assets/Logo_EID.png" alt="" style="width:10vw;"></a>
             </div>
             <div class="col p-0 m-0 d-flex justify-content-center mt-2">
-                <div class="p-0 m-0" style="font-size:3vw"><b>ANDONE SCHEDULE</b></div>
+                <div class="p-0 m-0" style="font-size:3vw"><b>ANDON SCHEDULE</b></div>
             </div>
             <div class="col-md d-flex justify-content-end align-items-center mt-2">
                 <div class="ps-5 pe-5 p-2 d-none d-xl-block" id="Time"
