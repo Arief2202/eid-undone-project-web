@@ -32,4 +32,8 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/edit', 'editView')->name('edit');
     Route::post('/edit', 'editPost')->name('edit.post');
     Route::get('/history', 'historyView')->name('history');
+
+    Route::get('/api/home', 'getDataAjaxHome');
+    Route::get('/api/edit', 'getDataAjaxEdit');
+    Route::get('/api/history', 'getDataAjaxHistory');
 });

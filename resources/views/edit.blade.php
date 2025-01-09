@@ -17,14 +17,14 @@
 
     <div class="mt-2 h-100 w-100 p-0 m-0 d-flex justify-content-center" style="width:95vw;">
         <div class="row h-100 p-0 m-0" style="width:95vw;">
-            <div class="col-4 d-flex align-items-center">
-                <img src="/assets/Logo_EID.png" alt="" style="width:10vw;">
+            <div class="col d-flex align-items-center">
+                <a href="/"><img src="/assets/Logo_EID.png" alt="" style="width:10vw;"></a>
             </div>
-            <div class="col-4 p-0 m-0 d-flex justify-content-center mt-2">
+            <div class="col p-0 m-0 d-flex justify-content-center mt-2">
                 <div class="p-0 m-0" style="font-size:3vw"><b>Edit</b></div>
             </div>
-            <div class="col-4 d-flex justify-content-end align-items-center mt-2">
-                <div class="ps-5 pe-5 p-2" id="Time"
+            <div class="col-md d-flex justify-content-end align-items-center mt-2">
+                <div class="ps-5 pe-5 p-2 d-none d-xl-block" id="Time"
                     style="background: rgb(0, 107, 95); background: linear-gradient(144deg, rgba(0, 107, 95,1) 0%, rgb(99, 124, 0) 100%); border-radius:50px; font-size:2.0vw; font-weight:700; background-repeat: no-repeat;"></div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <?php foreach($datas as $i=>$data){
                             echo "<tr class=\"";
 
@@ -199,14 +199,25 @@
     <script src="/js/dataTables.min.js"></script>
     <script src="/js/script.js"></script>
     <script type="text/javascript">
+        var lastLength = 0;
         $('#myTable').DataTable({
-            columnDefs: [
-                { width: 120, targets: 0 },
-                { width: 120, targets: 1},
-                { width: 150, targets: 6 },
-                { width: 150, targets: 7 },
-            ],
+
         });
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if(lastLength != this.responseText.length){
+                    $('#myTable').DataTable().destroy();
+                    document.getElementById("tbody").innerHTML=this.responseText;
+                    $('#myTable').DataTable().draw();
+                }
+                lastLength = this.responseText.length;
+            }
+            xhttp.open("GET", "/api/edit", true);
+            xhttp.send();
+        }
+        loadDoc();
+        setInterval(loadDoc, 1000);
 
         function updateModal(id){
             document.getElementById("modal_id").value = id;

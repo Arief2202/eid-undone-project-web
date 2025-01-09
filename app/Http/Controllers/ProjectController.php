@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\project;
 use Illuminate\Http\Request;
+use DateTime;
 
 class ProjectController extends Controller
 {
@@ -42,6 +43,7 @@ class ProjectController extends Controller
             ]
         );
     }
+
     public function historyView()
     {
         return view("history",
@@ -74,5 +76,78 @@ class ProjectController extends Controller
         $data->status = $request->status;
         $data->save();
         return redirect()->back();
+    }
+
+    public function getDataAjaxHome(){
+        foreach(project::where("status", "!=", "Cancel")->where("status", "!=", "Finish")->get() as $i=>$data){
+            echo "<tr class=\"";
+
+            $date1 = new DateTime();
+            $date2 = new DateTime($data->due_date);
+            $interval = $date1->diff($date2);
+            $selisih = (int) $interval->format('%R%a');
+
+            if($selisih < 0) echo "level3";
+            else if($selisih < 14) echo "level2";
+
+            echo "\">";
+
+            echo "<td>$selisih</td>";
+            echo "<td>$data->no_spk</td>";
+            echo "<td>$data->nama_project</td>";
+            echo "<td>$data->keterangan</td>";
+            echo "<td>$data->customer</td>";
+            echo "<td>$data->pic</td>";
+            echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
+            echo "<td>$data->status</td>";
+            echo "</tr>";
+        }
+        die;return;
+    }
+    public function getDataAjaxHistory(){
+        foreach(project::where(function ($query) {
+                    $query->where('status', '=', "Finish")
+                        ->orWhere('status', '=', "Cancel")
+                        ->orWhere('due_date', '<', date('Y-m-d'));
+                })->get() as $i=>$data)
+        {
+            echo "<tr class=\"history\">";
+            echo "<td>$data->no_spk</td>";
+            echo "<td>$data->nama_project</td>";
+            echo "<td>$data->keterangan</td>";
+            echo "<td>$data->customer</td>";
+            echo "<td>$data->pic</td>";
+            echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
+            echo "<td>$data->status</td>";
+            echo "</tr>";
+        }
+        die;return;
+    }
+    public function getDataAjaxEdit(){
+        foreach(project::where("status", "!=", "Cancel")->where("status", "!=", "Finish")->get() as $i=>$data){
+            echo "<tr class=\"";
+
+            $date1 = new DateTime();
+            $date2 = new DateTime($data->due_date);
+            $interval = $date1->diff($date2);
+            $selisih = (int) $interval->format('%R%a');
+
+            if($selisih < 0) echo "level3";
+            else if($selisih < 14) echo "level2";
+
+            echo "\">";
+
+            echo "<td>$selisih</td>";
+            echo "<td>$data->no_spk</td>";
+            echo "<td>$data->nama_project</td>";
+            echo "<td>$data->keterangan</td>";
+            echo "<td>$data->customer</td>";
+            echo "<td>$data->pic</td>";
+            echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
+            echo "<td>$data->status</td>";
+            echo "<td><button onclick=\"updateModal($data->id)\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\">Edit</button><form method=\"POST\" action=\"/delete/$data->id\" style=\"display: inline;\"><button class=\"btn btn-danger\" type=\"submit\">Delete</button></form></td>";
+            echo "</tr>";
+        }
+        die;return;
     }
 }
