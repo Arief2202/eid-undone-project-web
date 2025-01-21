@@ -41,7 +41,7 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" href="/">Home</a>
-              @if($user_type == 'admin')<a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Project</a>@endif
+              @if($user_type == 'admin')<a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal2">Add Project</a>@endif
               @if($user_type == 'admin')<a class="nav-link active" aria-current="page" href="/edit">Edit Project</a>@endif
               <a class="nav-link" href="/history">History Project</a>
               @if($user_type == 'admin' || $user_type == 'user')<a class="nav-link" href="/logout">Logout</a>@endif
