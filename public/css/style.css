@@ -76,6 +76,21 @@
     border-color: var(--bs-table-border-color);
     border-bottom: 2px solid #000;
 }
+
+.table-stripped-electrindo tbody .level0{
+    --bs-table-color: #000;
+    --bs-table-bg: rgb(206, 206, 206);
+    --bs-table-border-color: #c6acae;
+    --bs-table-striped-bg: rgb(206, 206, 206);
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #dfc2c4;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #a9d08e;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color);
+    border-bottom: 2px solid #000;
+}
 .table-stripped-electrindo tbody .history{
     --bs-table-color: #000;
     --bs-table-bg: #fff;

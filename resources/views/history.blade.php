@@ -68,19 +68,6 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        <?php foreach($datas as $i=>$data){?>
-                        <tr class="history">
-                            <td>{{ $data->no_spk }}</td>
-                            <td>{{ $data->nama_project }}</td>
-                            <td>{{ $data->keterangan }}</td>
-                            <td>{{ $data->customer }}</td>
-                            <td>{{ $data->pic }}</td>
-                            <td>{{ date('d M Y', strtotime($data->due_date)) }}</td>
-                            <td>
-                                {{ $data->status}}
-                            </td>
-                        </tr>
-                        <?php }?>
                     </tbody>
                 </table>
             </div>

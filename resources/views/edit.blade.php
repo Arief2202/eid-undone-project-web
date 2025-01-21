@@ -69,34 +69,6 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        <?php foreach($datas as $i=>$data){
-                            echo "<tr class=\"";
-
-                            $date1 = new DateTime();
-                            $date2 = new DateTime($data->due_date);
-                            $interval = $date1->diff($date2);
-                            $selisih = (int) $interval->format('%R%a');
-
-                            if($selisih < 0) echo "level3";
-                            else if($selisih < 14) echo "level2";
-
-                            echo "\">";?>
-
-                            <?php
-                                echo "<td>".$selisih."</td>";
-                            ?>
-                            <td>{{ $data->no_spk }}</td>
-                            <td>{{ $data->nama_project }}</td>
-                            <td>{{ $data->keterangan }}</td>
-                            <td>{{ $data->customer }}</td>
-                            <td>{{ $data->pic }}</td>
-                            <td>{{ date('d M Y', strtotime($data->due_date)) }}</td>
-                            <td>
-                                {{ $data->status}}
-                            </td>
-                            <td><button onclick="updateModal({{$data->id}})" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button><form method="POST" action="/delete/{{$data->id}}" style="display: inline;">@csrf<button class="btn btn-danger" type="submit">Delete</button></form></td>
-                        </tr>
-                        <?php }?>
                     </tbody>
                 </table>
             </div>

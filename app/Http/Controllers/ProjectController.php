@@ -33,13 +33,23 @@ class ProjectController extends Controller
         }
         return view("index",
             [
-                "datas" => project::where("status", "!=", "Cancel")->where("status", "!=", "Finish")->get(),
                 "user_type" => $user_type,
             ]
         );
     }
 
     public function create(Request $request){
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password']));
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
         project::create([
             "no_spk" => $request->no_spk,
             "nama_project" => $request->nama_project,
@@ -72,7 +82,6 @@ class ProjectController extends Controller
 
         return view("edit",
             [
-                "datas" => project::get(),
                 "user_type" => $user_type
             ]
         );
@@ -96,11 +105,6 @@ class ProjectController extends Controller
         }
         return view("history",
             [
-                "datas" => project::where(function ($query) {
-                    $query->where('status', '=', "Finish")
-                          ->orWhere('status', '=', "Cancel")
-                          ->orWhere('due_date', '<', date('Y-m-d'));
-                })->get(),
                 "user_type" => $user_type
             ]
         );
@@ -111,10 +115,32 @@ class ProjectController extends Controller
         die;return;
     }
     public function deleteProject($id){
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password']));
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
         project::where("id", "=", $id)->first()->delete();
         return redirect()->back();
     }
     public function editPost(Request $request){
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password']));
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
         $data = project::where("id", "=", $request->id)->first();
         $data->no_spk = $request->no_spk;
         $data->nama_project = $request->nama_project;
@@ -181,12 +207,15 @@ class ProjectController extends Controller
             $interval = $date1->diff($date2);
             $selisih = (int) $interval->format('%R%a');
 
-            if($selisih < 0) echo "level3";
-            else if($selisih < 14) echo "level2";
+            if($data->status == "Finish" || $data->status == "Cancel") echo "level0";
+            else{
+                if($selisih < 0) echo "level3";
+                else if($selisih < 14) echo "level2";
+            }
 
             echo "\">";
-
-            echo "<td>$selisih</td>";
+            if($data->status == "Finish" || $data->status == "Cancel") echo "<td>-</td>";
+            else echo "<td>$selisih</td>";
             echo "<td>$data->no_spk</td>";
             echo "<td>$data->nama_project</td>";
             echo "<td>$data->keterangan</td>";
