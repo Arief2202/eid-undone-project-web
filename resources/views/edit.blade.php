@@ -80,7 +80,7 @@
             <div class="col-6">
                 <div class="d-flex justify-content-start ms-4">
                     <a href="/" type="button" class="btn btn-primary button-bottom">< Back</a>
-                    <button type="button" class="btn btn-primary button-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Project</button>
+                    <button type="button" class="btn btn-primary button-bottom" data-bs-toggle="modal" data-bs-target="#exampleModal2">Add Project</button>
                     <a href="/history" type="button" class="btn btn-primary button-bottom">History</a>
                     <!-- <button type="button" class="btn btn-primary button-bottom">Add Project</button> -->
                 </div>

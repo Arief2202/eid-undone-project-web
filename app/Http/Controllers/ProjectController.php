@@ -114,7 +114,7 @@ class ProjectController extends Controller
         echo json_encode(project::where("id", "=", $id)->first());
         die;return;
     }
-    public function deleteProject($id){
+    public function deleteProject($id, Request $request){
         $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
         if (!$request->session()->exists('user')){
             if(!$local) return redirect('/login');
