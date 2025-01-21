@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\LoginHandler;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,11 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/edit', function () {
-    return view('edit');
-});
-Route::get('/history', function () {
-    return view('history');
+Route::controller(LoginHandler::class)->group(function () {
+    Route::get('login', 'index');
+    Route::post('login', 'store');
+    Route::get('logout', 'logout');
+    Route::post('logout', 'logout');
 });
 
 Route::controller(ProjectController::class)->group(function () {
@@ -37,3 +35,5 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/api/edit', 'getDataAjaxEdit');
     Route::get('/api/history', 'getDataAjaxHistory');
 });
+
+// require __DIR__.'/auth.php';

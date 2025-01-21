@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\project;
 use Illuminate\Http\Request;
 use DateTime;
+session_start();
 
 class ProjectController extends Controller
 {
@@ -13,11 +14,27 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        $user_type = "guest";
+
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password'])) $user_type = 'admin';
+            else if(password_verify('user', $user['username']) && password_verify(env("USER_PASSWORD", "password"), $user['password'])) $user_type = 'user';
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
         return view("index",
             [
                 "datas" => project::where("status", "!=", "Cancel")->where("status", "!=", "Finish")->get(),
+                "user_type" => $user_type,
             ]
         );
     }
@@ -35,17 +52,48 @@ class ProjectController extends Controller
         return redirect()->back();
     }
 
-    public function editView()
+    public function editView(Request $request)
     {
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        $user_type = "guest";
+
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password'])) $user_type = 'admin';
+            else if(password_verify('user', $user['username']) && password_verify(env("USER_PASSWORD", "password"), $user['password'])) $user_type = 'user';
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
+        if($user_type != "admin") return redirect('/login');
+
         return view("edit",
             [
                 "datas" => project::get(),
+                "user_type" => $user_type
             ]
         );
     }
 
-    public function historyView()
+    public function historyView(Request $request)
     {
+        $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        $user_type = "guest";
+
+        if (!$request->session()->exists('user')){
+            if(!$local) return redirect('/login');
+        }
+        else {
+            $user =  $request->session()->get('user');
+            if(password_verify('admin', $user['username']) && password_verify(env("ADMIN_PASSWORD", "password"), $user['password'])) $user_type = 'admin';
+            else if(password_verify('user', $user['username']) && password_verify(env("USER_PASSWORD", "password"), $user['password'])) $user_type = 'user';
+            else{
+                if(!$local) return redirect('/login');
+            }
+        }
         return view("history",
             [
                 "datas" => project::where(function ($query) {
@@ -53,6 +101,7 @@ class ProjectController extends Controller
                           ->orWhere('status', '=', "Cancel")
                           ->orWhere('due_date', '<', date('Y-m-d'));
                 })->get(),
+                "user_type" => $user_type
             ]
         );
     }
