@@ -173,7 +173,7 @@ class ProjectController extends Controller
         die;return;
     }
     public function getDataAjaxEdit(){
-        foreach(project::where("status", "!=", "Cancel")->where("status", "!=", "Finish")->get() as $i=>$data){
+        foreach(project::all() as $i=>$data){
             echo "<tr class=\"";
 
             $date1 = new DateTime();
