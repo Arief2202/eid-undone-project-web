@@ -93,7 +93,7 @@
 }
 .table-stripped-electrindo tbody .history{
     --bs-table-color: #000;
-    --bs-table-bg: #fff;
+    --bs-table-bg: #90c46c;
     --bs-table-border-color: #c6acae;
     --bs-table-striped-bg: #a9d08e;
     --bs-table-striped-color: #000;
@@ -106,7 +106,7 @@
     border-bottom: 2px solid #000;
 }
 
-.table tbody tr td {
+.table tbody tr td{
     border: none;
     font-size: 1.0vw;
     font-weight: 600;
@@ -124,4 +124,11 @@
     font-size: 1.2vw;
     font-weight: 600;
     margin-inline-end: 20px;
+}
+
+
+.custom-tooltip {
+    --bs-tooltip-max-width: 300px;
+    --bs-tooltip-opacity: 100%;
+    --bs-tooltip-font-size: 18px;
 }

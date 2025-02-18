@@ -166,13 +166,12 @@ class ProjectController extends Controller
             else if($selisih < 14) echo "level2";
 
             echo "\">";
-
             echo "<td>$selisih</td>";
-            echo "<td>$data->no_spk</td>";
-            echo "<td>$data->nama_project</td>";
-            echo "<td>$data->keterangan</td>";
-            echo "<td>$data->customer</td>";
-            echo "<td>$data->pic</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->no_spk\">$data->no_spk</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->nama_project\">$data->nama_project</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->keterangan\">$data->keterangan</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->customer\">$data->customer</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->pic\">$data->pic</td>";
             echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
             echo "<td>$data->status</td>";
             echo "</tr>";
@@ -187,11 +186,11 @@ class ProjectController extends Controller
                 })->get() as $i=>$data)
         {
             echo "<tr class=\"history\">";
-            echo "<td>$data->no_spk</td>";
-            echo "<td>$data->nama_project</td>";
-            echo "<td>$data->keterangan</td>";
-            echo "<td>$data->customer</td>";
-            echo "<td>$data->pic</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->no_spk\">$data->no_spk</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->nama_project\">$data->nama_project</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->keterangan\">$data->keterangan</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->customer\">$data->customer</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->pic\">$data->pic</td>";
             echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
             echo "<td>$data->status</td>";
             echo "</tr>";
@@ -216,11 +215,11 @@ class ProjectController extends Controller
             echo "\">";
             if($data->status == "Finish" || $data->status == "Cancel") echo "<td>-</td>";
             else echo "<td>$selisih</td>";
-            echo "<td>$data->no_spk</td>";
-            echo "<td>$data->nama_project</td>";
-            echo "<td>$data->keterangan</td>";
-            echo "<td>$data->customer</td>";
-            echo "<td>$data->pic</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->no_spk\">$data->no_spk</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->nama_project\">$data->nama_project</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->keterangan\">$data->keterangan</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->customer\">$data->customer</td>";
+            echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->pic\">$data->pic</td>";
             echo "<td>".date('d M Y', strtotime($data->due_date))."</td>";
             echo "<td>$data->status</td>";
             echo "<td><button onclick=\"updateModal($data->id)\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\">Edit</button><form method=\"POST\" action=\"/delete/$data->id\" style=\"display: inline;\"><button class=\"btn btn-danger\" type=\"submit\">Delete</button></form></td>";

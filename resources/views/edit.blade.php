@@ -214,6 +214,8 @@
                 if(lastLength != this.responseText.length){
                     $('#myTable').DataTable().destroy();
                     document.getElementById("tbody").innerHTML=this.responseText;
+                    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+                    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
                     $('#myTable').DataTable().draw();
                 }
                 lastLength = this.responseText.length;

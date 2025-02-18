@@ -152,16 +152,28 @@
     <script src="/js/script.js"></script>
     <script type="text/javascript">
         var lastLength = 0;
-        $('#myTable').DataTable({
-
-        });
+        $('#myTable').DataTable();
         function loadDoc() {
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                 if(lastLength != this.responseText.length){
                     $('#myTable').DataTable().destroy();
                     document.getElementById("tbody").innerHTML=this.responseText;
-                    $('#myTable').DataTable().draw();
+                    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+                    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+                    if(screen.width >= 1800 && screen.height >= 1000){
+                        $('#myTable').DataTable({
+                            @if($user_type != 'admin' && $user_type != 'user')
+                                lengthMenu: [
+                                    [15, 25, 50, -1],
+                                    [15, 25, 50, 'All']
+                                ]
+                            @endif
+                        }).draw(false);
+                    }
+                    else{
+                        $('#myTable').DataTable().draw(false);
+                    }
                 }
                 lastLength = this.responseText.length;
             }
