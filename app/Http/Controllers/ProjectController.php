@@ -17,7 +17,9 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
+        $local = false;
         $local = $request->ip() == "127.0.0.1" || $request->ip() == "0.0.0.0" || $request->ip() == "localhost";
+        if($request->tv == "true") $local = true;
         $user_type = "guest";
 
         if (!$request->session()->exists('user')){
