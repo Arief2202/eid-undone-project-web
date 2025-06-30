@@ -57,6 +57,7 @@
                 <table class="table table-striped table-stripped-electrindo p-0 m-0 disabled nowrap" id="myTable" style="max-width:100vw;">
                     <thead class="">
                         <tr class="table-electrindo" style="background-color:#24ab24;">
+                            <th scope="col">No</th>
                             <th scope="col">Sisa Hari</th>
                             <th scope="col">No SPK</th>
                             <th scope="col">Nama Project</th>

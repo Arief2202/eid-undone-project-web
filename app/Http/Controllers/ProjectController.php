@@ -199,8 +199,17 @@ class ProjectController extends Controller
         }
         die;return;
     }
+
+    public $idx = 0;
     public function getDataAjaxEdit(){
-        foreach(project::all() as $i=>$data){
+        $this->idx = 0;
+        $this->printData(project::orderBy('due_date', 'DESC')->where('status', '!=', 'Finish')->get());
+        $this->printData(project::where('status', '=', 'Finish')->get());
+        die;return;
+    }
+    
+    function printData($collection){        
+        foreach($collection as $i=>$data){
             echo "<tr class=\"";
 
             $date1 = new DateTime();
@@ -215,6 +224,7 @@ class ProjectController extends Controller
             }
 
             echo "\">";
+            echo "<td>".(++$this->idx)."</td>";
             if($data->status == "Finish" || $data->status == "Cancel") echo "<td>-</td>";
             else echo "<td>$selisih</td>";
             echo "<td data-bs-toggle=\"tooltip\" data-bs-custom-class=\"custom-tooltip\" data-bs-placement=\"bottom\" data-bs-title=\"$data->no_spk\">$data->no_spk</td>";
@@ -227,6 +237,5 @@ class ProjectController extends Controller
             echo "<td><button onclick=\"updateModal($data->id)\" class=\"btn btn-primary me-2\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\">Edit</button><form method=\"POST\" action=\"/delete/$data->id\" style=\"display: inline;\"><button class=\"btn btn-danger\" type=\"submit\">Delete</button></form></td>";
             echo "</tr>";
         }
-        die;return;
     }
 }
